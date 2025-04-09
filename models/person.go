@@ -18,3 +18,8 @@ func (p *Person) Play() string {
 func (p *Person) Fight() string {
 	return fmt.Sprintf("Fighting, %s", p.Name)
 }
+
+type Employee struct {
+	Person     Person
+	Department string
+}
