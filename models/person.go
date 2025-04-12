@@ -1,8 +1,6 @@
 package models
 
-import (
-	"fmt"
-)
+import "fmt"
 
 type Person struct {
 	Name string
@@ -12,14 +10,16 @@ type Person struct {
 func (p *Person) Draw() string {
 	return fmt.Sprintf("Drawing, %s", p.Name)
 }
+
 func (p *Person) Play() string {
 	return fmt.Sprintf("Playing, %s", p.Name)
 }
+
 func (p *Person) Fight() string {
 	return fmt.Sprintf("Fighting, %s", p.Name)
 }
 
 type Employee struct {
-	Person     Person
+	Person     // Embedding Person
 	Department string
 }

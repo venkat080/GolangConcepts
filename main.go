@@ -6,18 +6,17 @@ import (
 )
 
 func main() {
-
 	Ramana := models.Employee{
 		Person:     models.Person{Name: "Ramana", Id: 1},
 		Department: "IT",
 	}
 
-	// Sandeep := models.Employee{
-	// 	models.Person{Name: "sandeep", Id: 2},
-	// 	"IT",
-	// }
+	Sandeep := models.Employee{
+		Person:     models.Person{Name: "Sandeep", Id: 2},
+		Department: "HR",
+	}
 
-	fmt.Println(Ramana.Draw())
-	// fmt.Println(Sandeep.Draw())
-
+	// Explicitly accessing the Draw method on the embedded Person field
+	fmt.Println(Ramana.Draw())  // Output: Drawing, Ramana
+	fmt.Println(Sandeep.Draw()) // Output: Drawing, Sandeep
 }
