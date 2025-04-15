@@ -5,6 +5,15 @@ import (
 	"time"
 )
 
+func GoRoutines() {
+	go Say("world")
+	Say("hello")
+	go LogActivity("Customer Request")
+	go SendNotification("Customer Request")
+	LogActivity("Order Request")
+	SendNotification("Order Request")
+	time.Sleep(1000 * time.Millisecond)
+}
 func Say(s string) {
 	for i := 0; i < 5; i++ {
 		time.Sleep(100 * time.Millisecond)
