@@ -25,4 +25,6 @@ func main() {
 
 	// Select statement
 	concepts.ChannelsWithSelectStatement()
+	// Worker Pool
+	concepts.WorkerPool()
 }
