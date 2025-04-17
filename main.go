@@ -15,16 +15,16 @@ func main() {
 	// concepts.Channels()
 
 	//// Race conditions cannot be seen in output as small program
-	concepts.ChannelsWithWaitGroup()
+	// concepts.ChannelsWithWaitGroup()
 
 	//// We are forcing the raceconditions here and it can be seen in this
-	concepts.ChannelsWithMutexExampleClearUnderstanding()
+	// concepts.ChannelsWithMutexExampleClearUnderstanding()
 
-	//// RWMutex
-	concepts.ChannelsWithRWMutex()
+	// //// RWMutex
+	// concepts.ChannelsWithRWMutex()
 
-	// Select statement
-	concepts.ChannelsWithSelectStatement()
+	// // Select statement
+	// concepts.ChannelsWithSelectStatement()
 	// Worker Pool
-	concepts.WorkerPool()
+	concepts.PrinterPool()
 }

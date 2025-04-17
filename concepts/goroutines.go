@@ -33,31 +33,49 @@ func SendNotification(user string) {
 	fmt.Printf("[%s] Notification sent.\n", user)
 }
 
-func WorkerPool() {
+// Simulate the print job handling using a worker pool
+func PrinterPool() {
+	// Total number of print jobs to be processed
 	const numJobs = 5
-	jobs := make(chan int, numJobs)
-	results := make(chan int, numJobs)
 
-	for w := 1; w <= 3; w++ {
-		go worker(w, jobs, results)
+	// Channel to queue incoming print jobs
+	printJobs := make(chan int, numJobs)
+
+	// Channel to receive print confirmations (results)
+	printConfirmations := make(chan int, numJobs)
+
+	// Start 3 printers (workers)
+	for printerID := 1; printerID <= 3; printerID++ {
+		go Printer(printerID, printJobs, printConfirmations)
 	}
 
-	for j := 1; j <= numJobs; j++ {
-		jobs <- j
-	}
-	close(jobs)
-
-	for a := 1; a <= numJobs; a++ {
-		<-results
+	// Send 5 print jobs to the queue
+	for jobID := 1; jobID <= numJobs; jobID++ {
+		fmt.Printf("📝 Submitted Print Job #%d to the queue\n", jobID)
+		printJobs <- jobID
 	}
 
+	// Close the job queue after all jobs are submitted
+	close(printJobs)
+
+	// Wait for all print confirmations
+	for i := 1; i <= numJobs; i++ {
+		<-printConfirmations
+	}
+	fmt.Println("\n✅ All print jobs completed.")
 }
 
-func worker(id int, jobs <-chan int, results chan<- int) {
-	for j := range jobs {
-		fmt.Println("worker", id, "started  job", j)
-		time.Sleep(time.Second)
-		fmt.Println("worker", id, "finished job", j)
-		results <- j * 2
+// printer simulates a worker (printer) that processes print jobs
+func Printer(id int, jobs <-chan int, results chan<- int) {
+	for job := range jobs {
+		// Start printing
+		fmt.Printf("🖨️ Printer %d started printing Job #%d\n", id, job)
+		time.Sleep(1 * time.Second) // Simulate print time
+
+		// Print complete
+		fmt.Printf("✅ Printer %d finished Job #%d\n", id, job)
+
+		// Send confirmation
+		results <- job
 	}
 }
